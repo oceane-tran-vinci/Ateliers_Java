@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AJ_atelier01_part1/AJ_atelier01_part1.iml" filepath="$PROJECT_DIR$/AJ_atelier01_part1/AJ_atelier01_part1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AJ_atelier01_part2/AJ_atelier01_part2.iml" filepath="$PROJECT_DIR$/AJ_atelier01_part2/AJ_atelier01_part2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AJ_atelier02_part1/AJ_atelier02_part1.iml" filepath="$PROJECT_DIR$/AJ_atelier02_part1/AJ_atelier02_part1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AJ_atelier02_part2/AJ_atelier02_part2.iml" filepath="$PROJECT_DIR$/AJ_atelier02_part2/AJ_atelier02_part2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Atelier_Java.iml" filepath="$PROJECT_DIR$/Atelier_Java.iml" />
+    </modules>
+  </component>
+</project>
