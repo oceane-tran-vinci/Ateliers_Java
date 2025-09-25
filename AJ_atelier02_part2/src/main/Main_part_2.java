@@ -62,10 +62,13 @@ public class Main_part_2 {
 
             Livre livre = new Livre();
             livre.ajouterPlat(plat);
-            livre.ajouterPlat(new Plat("Croquettes au fromage", 4, Difficulte.XXX, Cout.$$, Plat.Type.ENTREE));
+            livre.ajouterPlat(new Plat("Croquettes au fromage", 4, Difficulte.XXX,
+                Cout.$$, Plat.Type.ENTREE));
             System.out.println(livre);
-            livre.supprimerPlat(new Plat("Toasts aux champignons", 5, Difficulte.XXX, Cout.$$$, Plat.Type.ENTREE));
+            livre.supprimerPlat(new Plat("Toasts aux champignons", 5, Difficulte.XXX,
+                Cout.$$$, Plat.Type.ENTREE));
             System.out.println(livre);
+
         }
 
 }
