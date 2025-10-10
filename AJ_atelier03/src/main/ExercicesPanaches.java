@@ -70,6 +70,7 @@ public class ExercicesPanaches {
             .stream()
             .filter(t -> t.getTrader().getCity().equals("Cambridge"))
             .collect(Collectors.groupingBy(Transaction::getTrader, Collectors.counting()));
+
         s.forEach(
             ((trader, count) -> System.out.println(trader.getName() + ": "+ count + " transactions") )
         );

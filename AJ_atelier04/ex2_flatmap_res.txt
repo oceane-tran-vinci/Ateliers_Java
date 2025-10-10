@@ -1,0 +1,234 @@
+C:\Users\jose.vandermeulen\.jdks\openjdk-22.0.1\bin\java.exe "-javaagent:C:\Users\jose.vandermeulen\AppData\Local\JetBrains\IntelliJ IDEA 2023.2.2\lib\idea_rt.jar=50009" -Dfile.encoding=windows-1252 -Dsun.stdout.encoding=windows-1252 -Dsun.stderr.encoding=windows-1252 -classpath "C:\Users\jose.vandermeulen\OneDrive - Haute Ecole Léonard de Vinci\2025\JAVA_AV\2025_JAVA_AV_SEMAINE03\out\production\2025_JAVA_AV_SEMAINE03_04" main.ExcercicePortfolio
+===== Exercice 2.1 =====
+Actions de tous les portfolios (avec doublons):
+Il y a 60 actions au total dans tous les portfolios.
+AAPL
+GOOGL
+TSLA
+NVDA
+MSFT
+TSLA
+AMZN
+SAP
+NFLX
+AMZN
+ORCL
+META
+AMD
+INTC
+NVDA
+AVGO
+ASML
+TSM
+NVDA
+AMD
+CRM
+NOW
+SNOW
+MDB
+UBER
+ABNB
+LYFT
+DASH
+PANW
+CRWD
+ZS
+FTNT
+SHOP
+SQ
+PYPL
+MELI
+COST
+WMT
+TGT
+HD
+DIS
+SONY
+RBLX
+EA
+ADBE
+INTU
+ADSK
+ANSS
+IBM
+ORCL
+SAP
+INFY
+GOOG
+META
+AAPL
+MSFT
+TSLA
+RIVN
+LCID
+NIO
+
+===== Exercice 2.2 =====
+
+Actions uniques avec leur prix, triées par prix croissant:
+Il y a 49 actions uniques au total.
+AVGO=1705.0
+MELI=1705.0
+ASML=980.0
+COST=909.0
+NOW=776.2
+INTU=652.3
+NFLX=647.8
+ADBE=554.1
+META=512.3
+MSFT=412.55
+CRWD=395.6
+HD=369.2
+MDB=338.9
+ANSS=323.4
+PANW=320.5
+CRM=289.6
+TSLA=245.7
+ADSK=241.0
+AAPL=226.12
+ZS=192.2
+SAP=189.2
+IBM=185.2
+AMZN=181.9
+GOOGL=181.4
+GOOG=180.95
+TSM=164.5
+TGT=161.4
+AMD=157.4
+SNOW=156.4
+ABNB=151.3
+ORCL=143.1
+EA=140.7
+DASH=123.8
+NVDA=118.35
+DIS=93.5
+SHOP=85.1
+SONY=84.6
+UBER=76.1
+FTNT=73.4
+WMT=67.3
+SQ=65.7
+PYPL=64.2
+RBLX=38.9
+INTC=32.85
+INFY=19.1
+RIVN=17.3
+LYFT=13.4
+NIO=4.8
+LCID=3.2
+
+Couples (action, trader):
+AAPL=Trader:Raoul in Cambridge
+GOOGL=Trader:Raoul in Cambridge
+TSLA=Trader:Raoul in Cambridge
+NVDA=Trader:Raoul in Cambridge
+MSFT=Trader:Mario in Milan
+TSLA=Trader:Mario in Milan
+AMZN=Trader:Mario in Milan
+SAP=Trader:Mario in Milan
+NFLX=Trader:Alan in Cambridge
+AMZN=Trader:Alan in Cambridge
+ORCL=Trader:Alan in Cambridge
+META=Trader:Alan in Cambridge
+AMD=Trader:Brian in London
+INTC=Trader:Brian in London
+NVDA=Trader:Brian in London
+AVGO=Trader:Brian in London
+ASML=Trader:Sophia in Oxford
+TSM=Trader:Sophia in Oxford
+NVDA=Trader:Sophia in Oxford
+AMD=Trader:Sophia in Oxford
+CRM=Trader:Luca in Rome
+NOW=Trader:Luca in Rome
+SNOW=Trader:Luca in Rome
+MDB=Trader:Luca in Rome
+UBER=Trader:Emma in Cambridge
+ABNB=Trader:Emma in Cambridge
+LYFT=Trader:Emma in Cambridge
+DASH=Trader:Emma in Cambridge
+PANW=Trader:Zoé in Milan
+CRWD=Trader:Zoé in Milan
+ZS=Trader:Zoé in Milan
+FTNT=Trader:Zoé in Milan
+SHOP=Trader:Noah in Brussels
+SQ=Trader:Noah in Brussels
+PYPL=Trader:Noah in Brussels
+MELI=Trader:Noah in Brussels
+COST=Trader:Léo in Paris
+WMT=Trader:Léo in Paris
+TGT=Trader:Léo in Paris
+HD=Trader:Léo in Paris
+DIS=Trader:Mia in Zurich
+SONY=Trader:Mia in Zurich
+RBLX=Trader:Mia in Zurich
+EA=Trader:Mia in Zurich
+ADBE=Trader:Ava in Amsterdam
+INTU=Trader:Ava in Amsterdam
+ADSK=Trader:Ava in Amsterdam
+ANSS=Trader:Ava in Amsterdam
+IBM=Trader:Ivan in Berlin
+ORCL=Trader:Ivan in Berlin
+SAP=Trader:Ivan in Berlin
+INFY=Trader:Ivan in Berlin
+GOOG=Trader:Omar in Madrid
+META=Trader:Omar in Madrid
+AAPL=Trader:Omar in Madrid
+MSFT=Trader:Omar in Madrid
+TSLA=Trader:Nora in Lisbon
+RIVN=Trader:Nora in Lisbon
+LCID=Trader:Nora in Lisbon
+NIO=Trader:Nora in Lisbon
+
+Map associant à chaque action la liste des traders qui la possèdent:
+TGT -> [Trader:Léo in Paris]
+SONY -> [Trader:Mia in Zurich]
+GOOGL -> [Trader:Raoul in Cambridge]
+AAPL -> [Trader:Raoul in Cambridge, Trader:Omar in Madrid]
+AVGO -> [Trader:Brian in London]
+SAP -> [Trader:Mario in Milan, Trader:Ivan in Berlin]
+INTU -> [Trader:Ava in Amsterdam]
+RIVN -> [Trader:Nora in Lisbon]
+MDB -> [Trader:Luca in Rome]
+ABNB -> [Trader:Emma in Cambridge]
+DASH -> [Trader:Emma in Cambridge]
+ASML -> [Trader:Sophia in Oxford]
+SHOP -> [Trader:Noah in Brussels]
+MSFT -> [Trader:Mario in Milan, Trader:Omar in Madrid]
+COST -> [Trader:Léo in Paris]
+ANSS -> [Trader:Ava in Amsterdam]
+TSLA -> [Trader:Raoul in Cambridge, Trader:Mario in Milan, Trader:Nora in Lisbon]
+IBM -> [Trader:Ivan in Berlin]
+AMD -> [Trader:Brian in London, Trader:Sophia in Oxford]
+INFY -> [Trader:Ivan in Berlin]
+RBLX -> [Trader:Mia in Zurich]
+EA -> [Trader:Mia in Zurich]
+UBER -> [Trader:Emma in Cambridge]
+SQ -> [Trader:Noah in Brussels]
+PANW -> [Trader:Zoé in Milan]
+PYPL -> [Trader:Noah in Brussels]
+NFLX -> [Trader:Alan in Cambridge]
+GOOG -> [Trader:Omar in Madrid]
+META -> [Trader:Alan in Cambridge, Trader:Omar in Madrid]
+NVDA -> [Trader:Raoul in Cambridge, Trader:Brian in London, Trader:Sophia in Oxford]
+CRWD -> [Trader:Zoé in Milan]
+ADSK -> [Trader:Ava in Amsterdam]
+SNOW -> [Trader:Luca in Rome]
+ORCL -> [Trader:Alan in Cambridge, Trader:Ivan in Berlin]
+DIS -> [Trader:Mia in Zurich]
+TSM -> [Trader:Sophia in Oxford]
+LCID -> [Trader:Nora in Lisbon]
+MELI -> [Trader:Noah in Brussels]
+NIO -> [Trader:Nora in Lisbon]
+FTNT -> [Trader:Zoé in Milan]
+INTC -> [Trader:Brian in London]
+NOW -> [Trader:Luca in Rome]
+ADBE -> [Trader:Ava in Amsterdam]
+LYFT -> [Trader:Emma in Cambridge]
+ZS -> [Trader:Zoé in Milan]
+HD -> [Trader:Léo in Paris]
+AMZN -> [Trader:Mario in Milan, Trader:Alan in Cambridge]
+WMT -> [Trader:Léo in Paris]
+CRM -> [Trader:Luca in Rome]
+
+Il y a 49 actions au total dans tous les portfolios.
+Chaque action est possédée en moyenne par 1,22 traders.
