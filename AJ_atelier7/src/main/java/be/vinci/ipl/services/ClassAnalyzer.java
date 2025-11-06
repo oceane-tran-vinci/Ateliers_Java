@@ -5,6 +5,7 @@ import jakarta.json.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Parameter;
 import java.util.logging.Logger;
 
 /**
@@ -28,6 +29,8 @@ public class ClassAnalyzer {
     JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
     objectBuilder.add("name", aClass.getSimpleName());
     objectBuilder.add("fields", getFields());
+    //4.2) ajouter methods pour l'afficher sur le site
+    objectBuilder.add("methods", getMethods());
     return objectBuilder.build();
   }
 
@@ -106,7 +109,92 @@ public class ClassAnalyzer {
     } else {
       return "package";
     }
+  }
 
+  //4.2) Methods => casi la mm que Fields (4.1)
+  /**
+   * {
+   * name: "setFirstName",
+   * returnType: null,
+   * parameters: ["String"]
+   * visibility : "public" // public, private, protected, package
+   * isStatic: false,
+   * isAbstract: false
+   * }
+  **/
+  public JsonObject getMethod(Method m){
+    JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+    objectBuilder.add("name", m.getName());
+    objectBuilder.add("returnType", m.getReturnType().getSimpleName());
+    //4 methodes à créer => static et visibility comme fields mais y'a 2 autres
+    objectBuilder.add("parameters", getParameters(m));
+    objectBuilder.add("visibility", getMethodVisibility(m));
+    objectBuilder.add("isStatic", isMethodStatic(m));
+    objectBuilder.add("isAbstract", isMethodAbstract(m));
+    return objectBuilder.build();
+  }
+
+  /**
+   * methodds: [] // Set methods here, same as Fields
+   */
+  public JsonArray getMethods(){
+    JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+    for (Method m : aClass.getDeclaredMethods()) {
+      arrayBuilder.add(getMethod(m));
+    }
+    return arrayBuilder.build();
+  }
+
+  /**
+   * Get method parameters, and create a Json Array with the method parameters types.
+   * Example :
+   * [ {}, {} ]
+   */
+  //si on regarder la javadoc getMethod => on comprend qu'on veut un tableau avec les paramètres
+  public JsonArray getParameters(Method m) {
+    JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+    for (Parameter p : m.getParameters()) {
+      arrayBuilder.add(p.getType().getSimpleName());
+    }
+    return arrayBuilder.build();
+  }
+
+  /**
+   * Get method visibility in a string form
+   *
+   * @param m the method to check
+   * @return the visibility (public, private, protected, package)
+   */
+  private String getMethodVisibility(Method m) {
+    if (Modifier.isPublic(m.getModifiers())) {
+      return "public";
+    } else if (Modifier.isPrivate(m.getModifiers())) {
+      return "private";
+    } else if (Modifier.isProtected(m.getModifiers())) {
+      return "protected";
+    } else {
+      return "package";
+    }
+  }
+
+  /**
+   * Return whether a method is static or not
+   *
+   * @param m the method to check
+   * @return true if the method is static, false else
+   */
+  private boolean isMethodStatic(Method m) {
+    return Modifier.isStatic(m.getModifiers());
+  }
+
+  /**
+   * Return whether a method is abstract or not
+   *
+   * @param m the method to check
+   * @return true if the method is abstract, false else
+   */
+  private boolean isMethodAbstract(Method m) {
+    return Modifier.isAbstract(m.getModifiers());
   }
 
 }
