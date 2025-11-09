@@ -4,6 +4,7 @@ import be.vinci.ipl.classes.User;
 import be.vinci.ipl.instances.InstanceGraph1;
 import be.vinci.ipl.services.ClassAnalyzer;
 import be.vinci.ipl.services.InstancesAnalyzer;
+import be.vinci.ipl.utils.InstanceGraphBuilder;
 import jakarta.json.JsonStructure;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -38,19 +39,23 @@ public class Instances {
       //Instancier un objet via le constructeur par défaut
       Object builderObject = builderClass.getConstructor().newInstance();
 
-      // Récupérer la méthode "initInstanceGraph"
-      Method initMethdod = builderClass.getMethod("initInstanceGraph");
-      // Appeler dynamiquement la méthode et récupérer le graphe d’instances
-      Object instanceGraph = initMethdod.invoke(builderObject);
-      InstancesAnalyzer analyzer = new InstancesAnalyzer(instanceGraph);
-      return analyzer.getFullInfo();
-
+      // Parcourir toutes les méthodes de la classe
+      for (Method m : builderClass.getDeclaredMethods()) {
+        // Vérifier si la méthode est marquée avec @InstanceGraphBuilder
+        if (m.isAnnotationPresent(InstanceGraphBuilder.class)) {
+          // Appeler cette méthode pour obtenir le graphe d’instances
+          Object instanceGraph = m.invoke(builderObject);
+          InstancesAnalyzer analyzer = new InstancesAnalyzer(instanceGraph);
+          return analyzer.getFullInfo();
+        }
+      }
     } catch (ClassNotFoundException e) {
       throw new WebApplicationException(404);
     } catch (InvocationTargetException | InstantiationException |
              IllegalAccessException | NoSuchMethodException e) {
       throw new InternalError(e);
     }
-
+    // Si aucune méthode n'était annotée → erreur 404
+    throw new WebApplicationException(404);
   }
 }
