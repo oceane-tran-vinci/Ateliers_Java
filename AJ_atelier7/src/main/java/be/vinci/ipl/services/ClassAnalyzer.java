@@ -52,7 +52,7 @@ public class ClassAnalyzer {
         "type : getTypeName()": "java.lang.String",
          */
     objectBuilder.add("name", f.getName());
-    objectBuilder.add("type : getSimpleName()", f.getType().getSimpleName());
+    objectBuilder.add("type", f.getType().getSimpleName());
 
     //déjà donné
     objectBuilder.add("visibility", getFieldVisibility(f));

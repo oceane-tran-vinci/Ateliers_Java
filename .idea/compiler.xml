@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="AJ_atelier06_part2" />
+        <module name="AJ_atelier08" />
         <module name="AJ_atelier06_part1" />
         <module name="AJ_atelier7" />
+        <module name="AJ_atelier06_part2" />
       </profile>
     </annotationProcessing>
   </component>

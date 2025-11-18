@@ -3,6 +3,7 @@ package be.vinci.ipl.services;
 import jakarta.json.*;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 /**
  * Instances analyzer. It saves an instance into attribute, from a constructor, and
@@ -27,7 +28,7 @@ public class InstancesAnalyzer {
      */
     public JsonObject getFullInfo() {
         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-        // TODO add missing data
+        objectBuilder.add("classname", anInstance.getClass().getSimpleName());// TODO add missing data
         objectBuilder.add("fields", getFields());
         return objectBuilder.build();
     }
@@ -47,6 +48,18 @@ public class InstancesAnalyzer {
         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
         // TODO add missing info
         // TODO if type is an object (except String), ignore the value and do not send the value.
+        f.setAccessible(true);
+        objectBuilder.add("name", f.getName());
+        objectBuilder.add("type", f.getType().getSimpleName());
+        objectBuilder.add("isStatic", Modifier.isStatic(f.getModifiers()));
+        if (f.getType().isPrimitive() || f.getType() == String.class) {
+            try {
+                objectBuilder.add("value", String.valueOf(f.get(anInstance)));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
         return objectBuilder.build();
     }
 
@@ -58,6 +71,10 @@ public class InstancesAnalyzer {
     public JsonArray getFields() {
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
         // TODO Add all fields descriptions to array (use the getField() method above)
+        for (Field f : anInstance.getClass().getDeclaredFields()) {
+            arrayBuilder.add(getField(f));
+        }
+
         return arrayBuilder.build();
     }
 
