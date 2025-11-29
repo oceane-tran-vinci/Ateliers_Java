@@ -17,8 +17,8 @@ public class ProxyServer {
     // try-with-resources : le scanner sera automatiquement fermé
     try (Scanner scanner = new Scanner(System.in)) {
       // Boucle infinie : on continue de lire des URLs tant que l'application tourne
+      System.out.print("Entrez une URL : ");
       while (true) {
-        System.out.print("Entrez une URL : ");
         String url = scanner.nextLine(); // lecture de l'URL tapée par l'utilisateur
 
         // Création de la Query via la factory
