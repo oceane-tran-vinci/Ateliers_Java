@@ -1,9 +1,16 @@
 package server;
 
 import domaine.Query;
+import domaine.QueryFactory;
 import java.util.Scanner;
 
 public class ProxyServer {
+  QueryFactory queryFactory;
+
+  public ProxyServer(QueryFactory queryFactory) {
+    this.queryFactory = queryFactory;
+  }
+
 
   public void startServer() {
     // Scanner pour lire les URL depuis le clavier
@@ -14,10 +21,16 @@ public class ProxyServer {
         System.out.print("Entrez une URL : ");
         String url = scanner.nextLine(); // lecture de l'URL tapée par l'utilisateur
 
-        Query query = new Query(url, Query.QueryMethod.GET); // Création de la Query avec l'URL et méthode GET
-        QueryHandler handler = new QueryHandler(query); // Création d'un QueryHandler qui s'occupera de faire la requête
+        // Création de la Query via la factory
+        // On récupère un objet "vide" de type Query (interface)
+        Query query = this.queryFactory.getQuery();
+        query.setMethod(Query.QueryMethod.GET); // on définit la méthode HTTP GET
+        query.setUrl(url);                  // on définit l'URL
 
-        // On envoie la requête de manière asynchrone
+        // Création d'un QueryHandler qui s'occupera de faire la requête
+        QueryHandler handler = new QueryHandler(query);
+
+        // Envoi asynchrone de la requête
         // La méthode retourne immédiatement, le programme continue de tourner
         handler.sendQueryAndPrintResponse(); // asynchrone
       }

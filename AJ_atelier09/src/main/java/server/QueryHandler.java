@@ -10,18 +10,18 @@ import java.util.concurrent.CompletableFuture;
 public class QueryHandler {
 
   // L'objet Query contient les infos nécessaires : URL + méthode (GET/POST)
-  private Query query;
+  private Query queryImpl;
 
   // On injecte une Query lors de la création du QueryHandler
-  public QueryHandler(Query query) {
-    this.query = query;
+  public QueryHandler(Query queryImpl) {
+    this.queryImpl = queryImpl;
   }
 
   // Méthode principale : elle envoie la requête et affiche la réponse.
   // Elle est asynchrone → retourne un CompletableFuture<Void>
   public CompletableFuture<Void> sendQueryAndPrintResponse() {
     // Vérification : pour l'instant, seule la méthode GET est supportée
-    if (query.getMethod() != Query.QueryMethod.GET) {
+    if (queryImpl.getMethod() != Query.QueryMethod.GET) {
       throw new IllegalStateException("Only GET method is currently supported");
     }
 
@@ -30,7 +30,7 @@ public class QueryHandler {
 
     // 1. Construction de la requête HTTP à partir de l'URL de la Query
     HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create(query.getUrl()))  // utilisation de l'URL fournie par Query
+        .uri(URI.create(queryImpl.getUrl()))  // utilisation de l'URL fournie par Query
         .GET()                            // pour ce projet, uniquement GET
         .build();
 
