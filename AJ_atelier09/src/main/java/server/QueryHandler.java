@@ -10,10 +10,7 @@ import java.util.concurrent.CompletableFuture;
 public class QueryHandler {
 
   // L'objet Query contient les infos nécessaires : URL + méthode (GET/POST)
-  private final Query query;
-
-  // HttpClient utilisé pour envoyer les requêtes HTTP
-  private final HttpClient client = HttpClient.newHttpClient();
+  private Query query;
 
   // On injecte une Query lors de la création du QueryHandler
   public QueryHandler(Query query) {
@@ -23,6 +20,13 @@ public class QueryHandler {
   // Méthode principale : elle envoie la requête et affiche la réponse.
   // Elle est asynchrone → retourne un CompletableFuture<Void>
   public CompletableFuture<Void> sendQueryAndPrintResponse() {
+    // Vérification : pour l'instant, seule la méthode GET est supportée
+    if (query.getMethod() != Query.QueryMethod.GET) {
+      throw new IllegalStateException("Only GET method is currently supported");
+    }
+
+    // HttpClient utilisé pour envoyer les requêtes HTTP
+    HttpClient client = HttpClient.newHttpClient();
 
     // 1. Construction de la requête HTTP à partir de l'URL de la Query
     HttpRequest request = HttpRequest.newBuilder()
@@ -33,13 +37,19 @@ public class QueryHandler {
     // 2. Envoi asynchrone de la requête
     //   → sendAsync retourne un CompletableFuture contenant la réponse
     return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-
-        // 3. Exécution de ce bloc quand la requête est terminée
-        //    thenAccept = on consomme la réponse (pas de valeur de retour)
-        .thenAccept(response -> {
-          System.out.println("Status code : " + response.statusCode());
-          System.out.println("HTML :");
-          System.out.println(response.body());
-        });
+        // 3. Premier traitement après réception de la réponse
+        .thenApply(response -> {
+          // Simuler un long traitement (optionnel)
+          try {
+            Thread.sleep(10000);
+          } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+          }
+          // Affiche le code HTTP (200, 404, etc.)
+          System.out.println(response.statusCode());
+          return response;
+        })
+        .thenApply(HttpResponse::body)//On récupère uniquement le corps (HTML) de la réponse
+        .thenAccept(System.out::println); //On affiche le contenu du site dans la console
   }
 }

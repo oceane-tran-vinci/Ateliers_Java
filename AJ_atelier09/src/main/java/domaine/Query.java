@@ -20,7 +20,15 @@ public class Query {
     return url;
   }
 
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
   public QueryMethod getMethod() {
     return method;
+  }
+
+  public void setMethod(QueryMethod method) {
+    this.method = method;
   }
 }
