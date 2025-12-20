@@ -145,6 +145,8 @@ class ProduitTest {
   public void testGetPrix8() throws PrixNonDisponibleException {
     assertEquals(prixPub, produitAvecPrix.getPrix(DATE_AUJOURDHUI.minusDays(1)));
   }
+
+
   //test des méthodes equals et hashCode
 
   @Test

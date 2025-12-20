@@ -25,12 +25,17 @@ class PrixTest {
 
   //Tests du constructeur
 
+  //Vérifiez que le constructeur de la classe Prix lance une IllegalArgumentException
+  //si le type de la promo passée en paramètre est null.
   @Test
   @DisplayName("Test du constructeur avec paramètre Promo null")
   void testPrix1(){
     assertThrows(IllegalArgumentException.class,() -> new Prix(null,15));
   }
 
+  //Vérifiez que le constructeur de la classe Prix lance une IllegalArgumentException
+  //si la valeur passée en paramètre est <= 0 (faites un test paramétré afin de faire le test
+  //avec plusieurs valeurs).
   @ParameterizedTest
   @DisplayName("Test du constructeur avec valeur <0")
   @ValueSource(doubles={-7,-4,0})
@@ -40,6 +45,9 @@ class PrixTest {
 
   // Tests des getters
 
+  //1. Vérifiez que la valeur de la promo est initialisée à 0 lors de l’instanciation d’un prix au
+  //moyen du constructeur sans paramètre.
+  //2. Vérifiez que la valeur de la promo correspond bien à celle passée en paramètre du constructeur.
   @Test
   @DisplayName("Vérification de la valeur renvoyée par getValeurPromo")
   void testGetValeurPromo() {
@@ -48,6 +56,8 @@ class PrixTest {
         () ->assertEquals(30,prixSolde.getValeurPromo()));
   }
 
+  //3. Vérifiez que le type de la promo est null lors de l’instanciation d’un prix au moyen du constructeur sans paramètre.
+  //4. Vérifiez que le type de la promo correspond bien à celle passée en paramètre du  constructeur.
   @Test
   @DisplayName("Vérification de la valeur renvoyée par getTypePromo")
   void testGetTypePromo() {
@@ -58,6 +68,8 @@ class PrixTest {
 
   //Tests de définirPrix
 
+  //Vérifiez que la méthode definirPrix lance une IllegalArgumentException si le
+  //paramètre quantité est 0 ou négatif.
   @ParameterizedTest
   @ValueSource(ints={-1,0})
   @DisplayName("Test de la méthode getPrix avec une quantité < ou = à 0")
@@ -65,6 +77,8 @@ class PrixTest {
     assertThrows(IllegalArgumentException.class,()->prixPub.definirPrix(quantite,15));
   }
 
+  //Vérifiez que la méthode definirPrix lance une IllegalArgumentException si le
+  //paramètre prix unitaire est 0 ou négatif.
   @ParameterizedTest
   @ValueSource(doubles={-3,0})
   @DisplayName("Test de la méthode getPrix avec une valeur < ou = à 0")
@@ -72,6 +86,8 @@ class PrixTest {
     assertThrows(IllegalArgumentException.class,()->prixPub.definirPrix(15,valeur));
   }
 
+  //Définissez un prix de 6 euros à partir de 10 unités pour l’attribut prixAucune et vérifiez
+  //que l’ancien prix a été remplacé.
   @Test
   @DisplayName("Test du remplacement de la valeur pour une quantité dèjà existante")
   void definirPrix3() {
@@ -80,6 +96,9 @@ class PrixTest {
   }
 
   //Test de getPrix
+
+  //Vérifiez que la méthode lance une IllegalArgumentException si le paramètre
+  //quantité est négatif ou nul.
   @ParameterizedTest
   @ValueSource(ints = {-1,0})
   @DisplayName("Test de la méthode getPrix avec une quantité < ou = à 0")
@@ -103,12 +122,16 @@ class PrixTest {
     assertEquals(10,prixAucune.getPrix(quantite));
   }
 
+  //Testez qu’une QuantiteNonAutoriseeException est lancée si vous demandez le prix
+  //pour 2 unités pour l’attribut prixPub.
   @Test
   @DisplayName("Test de getPrix avec une quantite < à la plus petite quantité minimale")
   void testGetPrix3() {
     assertThrows(QuantiteNonAutoriseeException.class,()->prixPub.getPrix(2));
   }
 
+  //Testez qu’une QuantiteNonAutoriseeException est lancée si vous demandez le prix
+  //pour 1 unité pour l’attribut prixSolde.
   @Test
   @DisplayName("Test de getPrix s'il n'y a pas de prix défini")
   void testGetPrix4() {
