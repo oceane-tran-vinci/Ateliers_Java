@@ -46,6 +46,13 @@ public class ExerciceFunctionalInterface {
     System.out.println("Employés triés:");
     System.out.println(employes);
 
+    // Solution
+    employes.sort((e1, e2) -> {
+      if (e1.getTaille() == e2.getTaille()){
+        return e1.getNom().compareTo(e2.getNom());
+      }
+      return e2.getTaille() - e1.getTaille();
+    });
 
   }
 

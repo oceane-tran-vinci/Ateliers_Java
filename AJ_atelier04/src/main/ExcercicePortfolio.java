@@ -131,6 +131,7 @@ public class ExcercicePortfolio {
   // Exercice 2.1
   // renvoie la liste des actions de tous les portfolios (avec doublons)
   private static List<String> actions(List<Portfolio> portfolios) {
+    //TODO
     return portfolios
         .stream()
         .flatMap(p -> p.getActions().stream())
@@ -149,6 +150,7 @@ public class ExcercicePortfolio {
    */
   static List<Map.Entry<String, Double>> portfolioToAction(List<Portfolio> portfolios,
       Map<String, Double> prices) {
+    //TODO
     return portfolios
         .stream()
         .flatMap(p -> p.getActions().stream())
@@ -171,6 +173,7 @@ public class ExcercicePortfolio {
   // - Map.entry(k, v) construit un couple cl�/valeur.
   // - C�est pratique pour manipuler des paires simples sans cr�er une nouvelle classe.
   static List<Map.Entry<String, Trader>> actionTraderPairs(List<Portfolio> portfolios) {
+    //TODO
     return portfolios
         .stream()
         .flatMap(p -> p.getActions().stream().map(a -> Map.entry(a, p.getTrader())))
@@ -180,6 +183,7 @@ public class ExcercicePortfolio {
   // Exercice 2.4
   // Renvoie une map associant � chaque action la liste des traders qui la poss�dent
   static Map<String, List<Trader>> tradersByAction(List<Portfolio> portfolios) {
+    //TODO
     return portfolios
         .stream()
         .flatMap(p -> p.getActions().stream().map(a -> Map.entry(a, p.getTrader())))

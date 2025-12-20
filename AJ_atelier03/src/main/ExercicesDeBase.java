@@ -64,6 +64,7 @@ public class ExercicesDeBase {
     this.reduce2();
   }
 
+  //Construire la liste de toutes les transactions de 2011
   private void predicats1() {
     System.out.println("predicats1");
     Stream<Transaction> s = transactions
@@ -73,8 +74,8 @@ public class ExercicesDeBase {
     s.forEach(System.out::println);
   }
 
+  //Construire la liste de toutes les transactions dont la valeur est > 600
   private void predicats2() {
-
     System.out.println("predicats2");
     var s = transactions
         .stream() // TODO filtrer
@@ -83,8 +84,8 @@ public class ExercicesDeBase {
   }
 
 
+  //Construire la liste de toutes les transactions de Raou
   private void predicats3() {
-
     System.out.println("predicats3");
     var s = transactions
         .stream() // TODO filtrer
@@ -92,6 +93,7 @@ public class ExercicesDeBase {
     s.forEach(System.out::println);
   }
 
+  //Construire une liste des courtiers (traders).
   private void map0() {
     System.out.println("map0");
     // TODO transformer
@@ -104,6 +106,7 @@ public class ExercicesDeBase {
 
   }
 
+  //Construire la liste des villes où travaillent les courtiers.
   private void map1() {
     System.out.println("map1");
     // TODO transformer
@@ -116,6 +119,7 @@ public class ExercicesDeBase {
 
   }
 
+  //Construire la liste de tous les courtiers de Cambridge
   private void map2() {
     System.out.println("map2");
     // TODO transformer
@@ -129,6 +133,9 @@ public class ExercicesDeBase {
 
   }
 
+  //Construire une String contenant tous les noms des traders séparés par une virugle.
+  //Comme il s’agit d’une String et non d’une liste, utilisez la méthode joining() dans
+  //votre collect().
   private void map3() {
     System.out.println("map3");
     var transcTriees = transactions
@@ -139,6 +146,7 @@ public class ExercicesDeBase {
     System.out.println(transcTriees);
   }
 
+  //Construire la liste de toutes les transactions triées par ordre décroissant de valeurs.
   private void sort1() {
     System.out.println("sort1");
     var transcTriees = transactions
@@ -148,6 +156,7 @@ public class ExercicesDeBase {
     transcTriees.forEach(System.out::println);
   }
 
+  //Construire une String contenant tous les noms de traders triés par ordre alphabétique.
   private void sort2() {
     System.out.println("sort2");
     var nomsTries = transactions
@@ -159,6 +168,7 @@ public class ExercicesDeBase {
     System.out.println(nomsTries);
   }
 
+  //Afficher la valeur max des transactions
   private void reduce1() {
     System.out.println("reduce1");
     // TODO reduce
@@ -169,6 +179,11 @@ public class ExercicesDeBase {
     System.out.println(s);
   }
 
+  /*Afficher la transaction dont la valeur est la plus petite. Attention : on demande bien
+    d’afficher la transaction et non sa valeur ! Vous ne pouvez pas utiliser la méthode
+    min. Au besoin, créer une transaction « neutre » avec une valeur de
+    Integer.MAX_VALUE.
+   */
   private void reduce2() {
     System.out.println("reduce2");
     // TODO reduce

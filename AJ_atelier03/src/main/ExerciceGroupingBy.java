@@ -54,6 +54,7 @@ public class ExerciceGroupingBy {
         this.groupBy3();
     }
 
+    //Map<Trader, List<Transaction>> Transactions du trader
     private void groupBy1() {
         System.out.println("GroupBy1");
         Map<Trader, List<Transaction>> s = transactions
@@ -62,6 +63,8 @@ public class ExerciceGroupingBy {
         System.out.println(s);
     }
 
+    //Map<Trader,Long> (nombre de transactions de ce trader). Pour ceci il faudra
+    //utiliser la méthode counting() dans le collector.
     private void groupBy2() {
         System.out.println("GroupBy2");
         Map<Trader,Long> s = transactions
@@ -70,7 +73,15 @@ public class ExerciceGroupingBy {
         System.out.println(s);
     }
 
-
+    //Map<TransactionsLevel,List<Transaction>>
+    /*Considérant l’enum TransactionsLevel {VERY_HI, HI, LO, ME}, les transactions
+    sont réparties selon les critères suivants :
+    • si valeur >= 1000, elle est VERY_HI ;
+    • si 800 <= valeur <1000, elle est HI ;
+    • si 600 <= valeur < 800, elle est ME ;
+    • sinon elle est LO.
+    La map ne doit pas être triée.
+    */
     private void groupBy3() {
         System.out.println("GroupBy3");
         Map<TransactionsLevel,List<Transaction>> s = transactions

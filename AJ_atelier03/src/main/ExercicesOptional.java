@@ -57,7 +57,7 @@ public class ExercicesOptional {
 
   }
 
-
+  //Pour l’exercice trouvant la valeur max, utilisez orElse() et renvoyez -1 s’il n’y a pas de transactions.
   private void optional1(List<Transaction> transactions) {
     System.out.println("optional1");
     Integer s = transactions
@@ -68,6 +68,9 @@ public class ExercicesOptional {
     System.out.println(s);
   }
 
+  //Pour l’exercice dans lequel on demandait la transaction de valeur minimale,
+  //affichez un message lorsque l’optional est vide après réduction.
+  //Vous pouvez faire cela en deux étapes.
   private void optional2(List<Transaction> transactions) {
     System.out.println("optional2");
     Optional <Transaction> minTransOpt = transactions

@@ -1,10 +1,18 @@
 package employee;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class EmployeeManagement {
@@ -17,7 +25,11 @@ public class EmployeeManagement {
   private static final Supplier<Stream<String>> supplier = () -> {
     //TODO: retourner un stream créer à partir du fichier. Aidez vous de la p.15 : "Créer des streams"
     //      En cas d'IOException, vous devez lancer une UncheckedIOException
-    return null;
+    try {
+      return Files.lines(Paths.get("./resources/streamingvf.csv"), Charset.defaultCharset());
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
+    }
   };
 
   public static void main(String[] args) {
@@ -42,7 +54,12 @@ public class EmployeeManagement {
    */
   private static String firstLine() {
     //TODO
-    return null;
+    try(Stream<String> lines = supplier.get()) {
+      return lines.findFirst().get();
+    } catch(UncheckedIOException e) {
+      e.printStackTrace();
+    }
+    return "";
   }
 
 
@@ -55,7 +72,10 @@ public class EmployeeManagement {
     Predicate<String> predicate = s -> s.length() > 8;
     //TODO: combiner predicate avec d'autres  (p.7 : "Predicate"), puis le passer en paramètre de
     //      de l'appel filter() pour filtrer les résultats.
-    return null;
+    predicate = predicate.and(s -> s.indexOf('O') > -1 || s.indexOf('K') > -1);
+    return supplier.get().map(Employee::new).map(Employee::getLastname)
+        .filter(predicate)
+        .collect(Collectors.toList());
   }
 
   /**
@@ -69,7 +89,9 @@ public class EmployeeManagement {
     //      prénom (firstname) de l'Employee passé en paramètre.
     //      Retourner une liste contenant le nombre d'occurences du caractère 'e' dans les
     //      prénoms de tous les employés en utilisant votre BiFunction.
-    return null;
+    BiFunction<Employee, Character, Integer> fun = (e, c) -> (int) e.getFirstname().chars().filter(ch -> ch == c).count();
+    return supplier.get().map(Employee::new).map(e -> fun.apply(e, 'e'))
+        .collect(Collectors.toList());
   }
 
   /**
@@ -78,7 +100,7 @@ public class EmployeeManagement {
    */
   private static boolean allEmailCorrect() {
     //TODO
-    return false;
+    return supplier.get().map(Employee::new).allMatch(e -> e.getEmail().endsWith("@streamingvf.be"));
   }
 
   /**
@@ -88,7 +110,10 @@ public class EmployeeManagement {
    */
   private static String longLastName() {
     //TODO
-    return "None";
+    return supplier.get().map(Employee::new).filter(e -> e.getLastname().length() > 14)
+        .map(Employee::getFirstname)
+        .findAny()
+        .orElse("None");
   }
 
   /**
@@ -97,7 +122,7 @@ public class EmployeeManagement {
    */
   private static long numbreOfPartTimers() {
     //TODO
-    return 0;
+    return supplier.get().map(Employee::new).filter(e -> !e.isFullTime()).count();
   }
 
   /**
@@ -107,7 +132,9 @@ public class EmployeeManagement {
    */
   private static Map<Boolean, List<Integer>> timeDistrubution() {
     //TODO
-    return null;
+    return supplier.get().map(Employee::new).collect(Collectors.partitioningBy(Employee::isFullTime,
+        Collectors.mapping(Employee::getId,
+            Collectors.toList())));
   }
 
   /**
@@ -118,15 +145,24 @@ public class EmployeeManagement {
   private static void withLines(Consumer<Stream<String>> consumer) {
     //TODO: try-with-resources avec le Supplier. Le consumer doit utiliser (en utilisant sa méthode accept())
     //      le résultat du Supplier.
+    try(Stream<String> lines = supplier.get()) {
+      consumer.accept(lines);
+    } catch (UncheckedIOException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
    * Fournit un Consumer à withLines. Le Consumer doit print le plus long nom de famille du fichier
    */
   private static void printLongestName() {
-    withLines( lines -> {
+    withLines( lines ->
       //TODO: print le plus long nom de famille du fichier
-    });
+      System.out.println(
+          lines.map(s -> new Employee(s).getLastname())
+              .max(Comparator.comparing(String::length))
+              .get())
+    );
   }
 
 
