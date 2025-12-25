@@ -15,7 +15,8 @@ public class BlacklistServiceImpl implements BlacklistService {
   static {
     //FileInputStream permet de lire le fichier "blacklist.properties" en tant que flux d'octets
     //+ objet Properties accepte que InputStream dc logique FileInputStream
-    try (FileInputStream in = new FileInputStream("blacklist.properties")) {
+    //(mettre le bon chemin du file properties)
+    try (FileInputStream in = new FileInputStream("AJ_atelier10/blacklist.properties")) {
 
       // On utilise cet objet parce que Properties.load() accepte directement un InputStream
       // Cela permet de lire facilement le fichier sans avoir besoin de FileReader ou autre
@@ -31,6 +32,10 @@ public class BlacklistServiceImpl implements BlacklistService {
       // Si le fichier n'existe pas ou n'est pas lisible, on lève une exception
       throw new RuntimeException(e);
     }
+  }
+
+  // Constructeur vide
+  public BlacklistServiceImpl() {
   }
 
   //2 : Méthode d'instance pour vérifier si l'URL est autorisée

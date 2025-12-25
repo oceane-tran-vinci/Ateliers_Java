@@ -1,19 +1,22 @@
 package server;
 
+import blacklist.BlacklistServiceImpl;
 import domaine.Query;
 import domaine.QueryFactory;
-import java.net.http.HttpClient;
+import domaine.QueryFactoryImpl;
 import java.util.Scanner;
 import blacklist.BlacklistService;
+import utils.Inject;
 
 public class ProxyServer {
-  QueryFactory queryFactory;
-  private BlacklistService blacklistService; //4.1.3 : Injecter ce service dans ProxyServer
+  // ⚠️ À cause de l’annotation @Inject, l’injecteur crée automatiquement une instance du champ via son constructeur.
+  // Comme une interface n’a pas de constructeur, l’attribut doit être du type implémentation concrète pour que l’injection fonctionne.
+  @Inject
+  private QueryFactoryImpl queryFactory;       // sera injecté automatiquement
+  @Inject
+  private BlacklistServiceImpl blacklistService; // sera injecté automatiquement
 
-  public ProxyServer(QueryFactory queryFactory, BlacklistService blacklistService) {
-    this.queryFactory = queryFactory;
-    this.blacklistService = blacklistService;
-  }
+  // plus besoin de constructeur avec paramètres
 
   public void startServer() {
     // Scanner pour lire les URL depuis le clavier
@@ -38,7 +41,7 @@ public class ProxyServer {
           queryHandler.sendQueryAndPrintResponse();
         } else {
           // Si la requête est rejetée (FALSE - domaine blacklisté), on affiche un message d'erreur.
-          System.err.println("Query rejected : domain blacklised !");
+          System.err.println("Query rejected : domain blacklisted !");
         }
       }
     }
