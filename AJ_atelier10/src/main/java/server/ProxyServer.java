@@ -4,12 +4,15 @@ import domaine.Query;
 import domaine.QueryFactory;
 import java.net.http.HttpClient;
 import java.util.Scanner;
+import blacklist.BlacklistService;
 
 public class ProxyServer {
   QueryFactory queryFactory;
+  private BlacklistService blacklistService; //4.1.3 : Injecter ce service dans ProxyServer
 
-  public ProxyServer(QueryFactory queryFactory) {
+  public ProxyServer(QueryFactory queryFactory, BlacklistService blacklistService) {
     this.queryFactory = queryFactory;
+    this.blacklistService = blacklistService;
   }
 
   public void startServer() {
@@ -27,12 +30,16 @@ public class ProxyServer {
         query.setMethod(Query.QueryMethod.GET); // on définit la méthode HTTP GET
         query.setUrl(url);                  // on définit l'URL
 
-        // Création d'un QueryHandler qui s'occupera de faire la requête
-        QueryHandler handler = new QueryHandler(query);
-
-        // Envoi asynchrone de la requête
-        // La méthode retourne immédiatement, le programme continue de tourner
-        handler.sendQueryAndPrintResponse(); // asynchrone
+        // 4.1.3 : Utilisation du BlacklistService pour vérifier la requête.
+        // La méthode check(query) retourne TRUE si l'URL est AUTORISÉE.
+        if (blacklistService.check(query)) {
+          // Si la requête est autorisée (TRUE), le traitement normal continue.
+          QueryHandler queryHandler = new QueryHandler(query);
+          queryHandler.sendQueryAndPrintResponse();
+        } else {
+          // Si la requête est rejetée (FALSE - domaine blacklisté), on affiche un message d'erreur.
+          System.err.println("Query rejected : domain blacklised !");
+        }
       }
     }
   }

@@ -48,10 +48,16 @@ public class InstancesAnalyzer {
         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
         // TODO add missing info
         // TODO if type is an object (except String), ignore the value and do not send the value.
-        f.setAccessible(true);
+
+        f.setAccessible(true); //lire tous les attributs, même privés. =>"Get a field, and create a Json Object with all field data."
         objectBuilder.add("name", f.getName());
         objectBuilder.add("type", f.getType().getSimpleName());
         objectBuilder.add("isStatic", Modifier.isStatic(f.getModifiers()));
+
+        //On ne récupère la valeur que si c’est un type simple (primitif ou String).
+        //"If the type is an object, the value will be null" ou encore "TODO if type is an object (except String), ignore the value and do not send the value."
+        //car si le type est un objet (User, Order,...) on renvoie rien (null) mais dans le cas contraire renvoyer la valeur
+        // et les seuls cas c'est si c'est primitif ou String
         if (f.getType().isPrimitive() || f.getType() == String.class) {
             try {
                 objectBuilder.add("value", String.valueOf(f.get(anInstance)));

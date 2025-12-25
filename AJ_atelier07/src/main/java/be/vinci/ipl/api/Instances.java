@@ -26,12 +26,12 @@ public class Instances {
   @Produces(MediaType.APPLICATION_JSON)
   public JsonStructure getInstanceGraphInfo(
       @QueryParam("builderclassname") String builderClassname) {
-        /* Avant :
-        InstanceGraph1 builder = new InstanceGraph1();    // TODO change this line to use the query parameter, and generate dynamically the builder
-        Object instanceGraph = builder.initInstanceGraph();   // TODO change this line to avoid calling initInstanceGraph() directly
-        InstancesAnalyzer analyzer = new InstancesAnalyzer(instanceGraph);
-        return analyzer.getFullInfo();
-         */
+    /* Avant :
+    InstanceGraph1 builder = new InstanceGraph1();    // TODO change this line to use the query parameter, and generate dynamically the builder
+    Object instanceGraph = builder.initInstanceGraph();   // TODO change this line to avoid calling initInstanceGraph() directly
+    InstancesAnalyzer analyzer = new InstancesAnalyzer(instanceGraph);
+    return analyzer.getFullInfo();
+     */
     //Après : voir vidéo prof (Introspection - Inspection et instanciation d'objets)
     try {
       // Charger dynamiquement la classe depuis le bon package
@@ -39,12 +39,14 @@ public class Instances {
       //Instancier un objet via le constructeur par défaut
       Object builderObject = builderClass.getConstructor().newInstance();
 
-      // Parcourir toutes les méthodes de la classe
-      for (Method m : builderClass.getDeclaredMethods()) {
-        // Vérifier si la méthode est marquée avec @InstanceGraphBuilder
-        if (m.isAnnotationPresent(InstanceGraphBuilder.class)) {
-          // Appeler cette méthode pour obtenir le graphe d’instances
-          Object instanceGraph = m.invoke(builderObject);
+      //Récupérer toute les méthodes de la classe (builderClass)
+      Method[] methods = builderClass.getDeclaredMethods();
+      //parcourir ces méthodes
+      for (Method method : methods) {
+        //si une méthode contient l'annotation InstanceGraphBuilder
+        if (method.isAnnotationPresent(InstanceGraphBuilder.class)) {
+          Object instanceGraph = method.invoke(builderObject); //on l'exécute
+          //et crée le JSON
           InstancesAnalyzer analyzer = new InstancesAnalyzer(instanceGraph);
           return analyzer.getFullInfo();
         }

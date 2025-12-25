@@ -46,11 +46,11 @@ public class ClassAnalyzer {
   public JsonObject getField(Field f) {
     JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
     // TODO add missing info
-        /* Utilisesr getSimpleName() => + propre
-        "type : getName()": "java.lang.String",
-        "type : getSimpleName()": "String",
-        "type : getTypeName()": "java.lang.String",
-         */
+    /* Utilisesr getSimpleName() => + propre
+    "type : getName()": "java.lang.String",
+    "type : getSimpleName()": "String",
+    "type : getTypeName()": "java.lang.String",
+     */
     objectBuilder.add("name", f.getName());
     objectBuilder.add("type", f.getType().getSimpleName());
 
@@ -84,10 +84,10 @@ public class ClassAnalyzer {
    */
   private boolean isFieldStatic(Field f) {
     // TODO
-        /* Modifier sert à vérifier les déclarations (modificateurs) => public, private, static, final,...
-        f.getModifiers() → renvoie les modificateurs du champ (public, private, static, etc.)
-        Modifier.isStatic(...) → renvoie true si le modificateur static est présent.
-        */
+    /* Modifier sert à vérifier les déclarations (modificateurs) => public, private, static, final,...
+    f.getModifiers() → renvoie les modificateurs du champ (public, private, static, etc.)
+    Modifier.isStatic(...) → renvoie true si le modificateur static est présent.
+    */
     return Modifier.isStatic(f.getModifiers());
   }
 
@@ -111,7 +111,7 @@ public class ClassAnalyzer {
     }
   }
 
-  //4.2) Methods => casi la mm que Fields (4.1)
+  //4.2) Methods => casi la mm que getField (4.1)
   /**
    * {
    * name: "setFirstName",

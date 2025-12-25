@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/AJ_atelier10/doc" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -9,7 +12,20 @@
         <option value="$PROJECT_DIR$/AJ_atelier7/pom.xml" />
         <option value="$PROJECT_DIR$/AJ_atelier08/pom.xml" />
         <option value="$PROJECT_DIR$/AJ_atelier09/pom.xml" />
+        <option value="$PROJECT_DIR$/AJ_atelier10/pom.xml" />
+        <option value="$PROJECT_DIR$/Test_Atelier6/pom.xml" />
+        <option value="$PROJECT_DIR$/AJ_atelier07/pom.xml" />
+        <option value="$PROJECT_DIR$/AJ_atelier07_test/pom.xml" />
+        <option value="$PROJECT_DIR$/AJ_atelier07_/pom.xml" />
+        <option value="$PROJECT_DIR$/AJ_Atelier07/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/AJ_Atelier07/pom.xml" />
+        <option value="$PROJECT_DIR$/AJ_atelier07_test/pom.xml" />
+        <option value="$PROJECT_DIR$/Test_Atelier6/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="21" project-jdk-type="JavaSDK">

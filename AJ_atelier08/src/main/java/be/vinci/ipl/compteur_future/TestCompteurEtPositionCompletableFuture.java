@@ -33,15 +33,14 @@ public class TestCompteurEtPositionCompletableFuture {
     System.out.println(
         "0. Durée d'exécution pour tous les compteurs de manière synchrone : " + duration + " ms");
 
+
     //ces 3 lignes était déjà là mais ça fait partie du TODO1
     System.out.println("1. Récupérer les valeurs de toutes les futures countAndGetPositionAsync");
     CompteurEtPosition.resetOrdreArrivee();
     start = System.currentTimeMillis();
-
     // TODO : 1. Exécuter tous les compteurs et déterminer la positon de manière asynchrone
     //  en faisant appel à la méthode countAndGetPositionAsync
-    futures = Arrays
-        .stream(compteurs)
+    futures = Arrays.stream(compteurs)
         .map(compteur -> compteur.countAndGetPositionAsync().thenAccept(
             position -> System.out.println(
                 "Compteur : " + compteur.getNom() + " - Position : " + position))
@@ -50,26 +49,26 @@ public class TestCompteurEtPositionCompletableFuture {
     CompletableFuture.allOf(futures).join();
     //Fin TODO1
 
+
     end = System.currentTimeMillis();
     duration = end - start;
     System.out.println("1. Durée d'exécution : " + duration + " ms");
+
 
     //ces 3 lignes était déjà là mais ça fait partie du TODO2
     System.out.println("2. Créer des futures à partir de countAndGetPosition");
     CompteurEtPosition.resetOrdreArrivee();
     start = System.currentTimeMillis();
-
     // TODO : 2. Exécuter tous les compteurs et déterminer la position de manière asynchrone
     //  en faisant appel à la méthode countAndGetPosition
-    futures = Arrays
-        .stream(compteurs)
+    futures = Arrays.stream(compteurs)
         .map(compteur -> CompletableFuture.runAsync(() ->
           { System.out.println("Compteur : " + compteur.getNom() + " - Position : "+ compteur.countAndGetPosition());})
         )
         .toArray(CompletableFuture[]::new);
-
     CompletableFuture.allOf(futures).join();
     //Fin TODO2
+
 
     end = System.currentTimeMillis();
     duration = end - start;

@@ -6,12 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="AJ_atelier08" />
-        <module name="AJ_atelier09" />
         <module name="AJ_atelier06_part1" />
         <module name="AJ_atelier7" />
+        <module name="AJ_atelier10" />
         <module name="AJ_atelier06_part2" />
+        <module name="AJ_atelier08" />
+        <module name="AJ_atelier09" />
+        <module name="AJ_atelier07" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="AJ_atelier07_test" target="21" />
+      <module name="Test_Atelier6" target="21" />
+    </bytecodeTargetLevel>
   </component>
 </project>

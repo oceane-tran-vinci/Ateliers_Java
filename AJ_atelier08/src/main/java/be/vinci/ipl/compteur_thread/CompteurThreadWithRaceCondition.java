@@ -29,15 +29,20 @@ public class CompteurThreadWithRaceCondition extends Thread {
         //TODO: Modifier ce code pour déterminer le gagnant (le 1er qui a fini de compter)
         //      et lors de l’enregistrement du gagnant, veuillez attendre 10 ms avant de l’enregistrer et afficher
         //      le nom du gagnant sous cette forme : "Le compteur gagnant est XXX à 2024-10-25T15:20:16.109588".
+
+        // Boucle de 1 à max pour compter
+        // Affiche le compteur et met une pause de 10ms à chaque étape
         IntStream.rangeClosed(1, max).forEach(i -> {
             System.out.println(nom + " : " + i);
             try {
                 Thread.sleep(10);
-                //Ajouter synchronized
+                // Bloc synchronized : un seul thread peut entrer pour déterminer le gagnant
                 synchronized (CompteurThreadWithRaceCondition.class) {
+                    // Si le compteur vient de finir et qu'aucun gagnant n'a été enregistré
                     if (i == max && gagnant == null) {
-                        Thread.sleep(10);
-                        gagnant = this;
+                        Thread.sleep(10); // Pause supplémentaire pour le rendu visuel
+                        gagnant = this; // Ce thread (this) devient le gagnant
+                        //ou System.currentTimeMillis() peut importe car ds test on changera en ms
                         System.out.println("Le compteur gagnant est " + gagnant.getNom() + " à " + LocalDateTime.now());
                     }
                 }

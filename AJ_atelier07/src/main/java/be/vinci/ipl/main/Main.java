@@ -45,7 +45,15 @@ public class Main {
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
         System.out.printf("Jersey app started available at %s\nHit enter to stop it...%n", BASE_URI);
-        System.out.printf("Try  %s\n%n", BASE_URI + "classes");
+        /*Classes : */
+        //4.1-4.2 :
+        //System.out.printf("Try  %s\n%n", BASE_URI + "classes");
+        //Apd 4.3 : mettre le nom de la classe
+        System.out.printf("For Classes Try  %s\n%n", BASE_URI + "classes?classname=NomClassARemplacer");
+
+        //4.3 : instances
+        System.out.println('\n');
+        System.out.printf("For Instances Try  %s\n%n", BASE_URI + "instances?builderclassname=NomInstanceARemplacer");
         System.in.read();
         server.stop();
     }

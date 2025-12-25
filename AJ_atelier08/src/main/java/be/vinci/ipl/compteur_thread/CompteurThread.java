@@ -32,7 +32,7 @@ public class CompteurThread extends Thread {
         System.out.println(nom + " a finit de compter jusqu'à " + max + " à " + LocalDateTime.now());
     }
 
-    //TODO: Ajouter méthode run()
+    //TODO: Ajouter méthode run() car créer un Thread
     public void run(){
         count();
     }
