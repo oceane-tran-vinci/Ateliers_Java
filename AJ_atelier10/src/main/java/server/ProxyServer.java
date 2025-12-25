@@ -9,12 +9,11 @@ import blacklist.BlacklistService;
 import utils.Inject;
 
 public class ProxyServer {
-  // ⚠️ À cause de l’annotation @Inject, l’injecteur crée automatiquement une instance du champ via son constructeur.
-  // Comme une interface n’a pas de constructeur, l’attribut doit être du type implémentation concrète pour que l’injection fonctionne.
+  //Mnt qu'on a fait un properties pour inject on peut utiliser l'interface
   @Inject
-  private QueryFactoryImpl queryFactory;       // sera injecté automatiquement
+  private QueryFactory queryFactory;       // sera injecté automatiquement
   @Inject
-  private BlacklistServiceImpl blacklistService; // sera injecté automatiquement
+  private BlacklistService blacklistService; // sera injecté automatiquement
 
   // plus besoin de constructeur avec paramètres
 
