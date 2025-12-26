@@ -13,6 +13,7 @@ class PrixTest {
   private Prix prixAucune;
   private Prix prixPub;
   private Prix prixSolde;
+
   @BeforeEach
   void setUp() {
     prixAucune = new Prix();
