@@ -152,16 +152,16 @@ public class ExcercicePortfolio {
       Map<String, Double> prices) {
     //TODO
     return portfolios
-        .stream()
-        .flatMap(p -> p.getActions().stream())
-        .distinct()
-        .map(a -> Map.entry(a, prices.get(a))) // crée Entry<String, Double>
+        .stream()                                    // stream sur la liste des portefeuilles
+        .flatMap(p -> p.getActions().stream())      // on aplatit toutes les listes d'actions de chaque portefeuille
+        .distinct()                                 // on enlève les doublons, on garde chaque action une seule fois
+        .map(a -> Map.entry(a, prices.get(a)))      // on associe chaque action à son prix => Map.Entry<String, Double>
         .sorted(
-            Comparator.comparing(Map.Entry<String, Double>::getValue) // tri sur le prix, ici il faut préciser <String, Double>
+            Comparator.comparing(Map.Entry<String, Double>::getValue) // tri sur le prix
                 .reversed()                                     // prix décroissant
-                .thenComparing(Map.Entry::getKey)               // puis symbole croissant (symbole = la Key), type déduit automatiquement pas besoin de préciser <String, Double>
+                .thenComparing(Map.Entry::getKey)               // puis symbole croissant
         )
-        .collect(Collectors.toList());
+        .collect(Collectors.toList());               // on retourne la liste finale
   }
 
   // Exercice 2.3
@@ -176,20 +176,25 @@ public class ExcercicePortfolio {
     //TODO
     return portfolios
         .stream()
+        // flatMap : pour chaque portfolio, on parcourt ses actions et crée un couple (action, trader) avec p.getTrader() directement dans le map
+        // on ne peut pas faire ce map après le flatMap, car une fois les actions aplaties, on n’aurait plus accès au portfolio pour récupérer le trader
         .flatMap(p -> p.getActions().stream().map(a -> Map.entry(a, p.getTrader())))
         .collect(Collectors.toList());
   }
 
   // Exercice 2.4
-  // Renvoie une map associant � chaque action la liste des traders qui la poss�dent
+  // Renvoie une map associant a chaque action la liste des traders qui la poss�dent
   static Map<String, List<Trader>> tradersByAction(List<Portfolio> portfolios) {
     //TODO
     return portfolios
         .stream()
         .flatMap(p -> p.getActions().stream().map(a -> Map.entry(a, p.getTrader())))
+        // groupingBy : regroupe toutes les entrées par action (la clé)
+        // mapping : pour chaque action, on extrait seulement le trader (la valeur) et on collecte tous les traders dans une liste
         .collect(Collectors.groupingBy(
             Map.Entry::getKey, // regroupe par action, type déduit
             Collectors.mapping(Map.Entry::getValue, Collectors.toList()) // transforme chaque Entry en Trader, type déduit
         ));
+
   }
 }
