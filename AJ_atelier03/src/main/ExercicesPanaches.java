@@ -63,6 +63,8 @@ public class ExercicesPanaches {
 
     //2. Déterminez combien de transactions chaque trader basé à Cambridge a effectuées.
     //Affichez les résultats sous la forme du nom de chaque trader suivi du nombre de transactions.
+    //Use Long à la place de int pour value car `Collectors.counting()` renvoie le nbre d’éléments dans un groupe,
+    // et ce nombre est de type `Long` pour pouvoir gérer de très grands comptes.
     private void exercice2() {
         // TODO: Filter transactions for traders in Cambridge, group by trader, and count their transactions.
         System.out.println("Exercice 2");
@@ -87,9 +89,10 @@ public class ExercicesPanaches {
             .filter(t -> t.getValue() > 500)
             .map(t -> t.getTrader().getName())
             .distinct()
+            //Par défaut, sorted trie en ordre croissant ; ici, en inversant n2 et n1 dans Integer.compare,
+            // on force un tri décroissant (du plus long au plus court).
             .sorted((n1, n2) -> Integer.compare(n2.length(), n1.length()))
-            .reduce((n1, n2) -> n1);
-
+            .reduce((n1, n2) -> n1); // Reduce prend le premier élément du stream trié (le nom le plus long) et ignore les suivants.
         s.ifPresent(name -> System.out.println("Longest trader name: " + name));
     }
 
