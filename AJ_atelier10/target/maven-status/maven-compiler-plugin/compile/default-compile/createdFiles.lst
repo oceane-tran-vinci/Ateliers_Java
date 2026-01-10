@@ -1,0 +1,10 @@
+blacklist\BlacklistServiceImpl.class
+domaine\Query.class
+domaine\Query$QueryMethod.class
+domaine\QueryImpl.class
+server\QueryHandler.class
+domaine\QueryFactoryImpl.class
+main\Main.class
+server\ProxyServer.class
+blacklist\BlacklistService.class
+domaine\QueryFactory.class

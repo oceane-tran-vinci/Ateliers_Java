@@ -157,7 +157,7 @@ public class ExcercicePortfolio {
         .distinct()                                 // on enlève les doublons, on garde chaque action une seule fois
         .map(a -> Map.entry(a, prices.get(a)))      // on associe chaque action à son prix => Map.Entry<String, Double>
         .sorted(
-            Comparator.comparing(Map.Entry<String, Double>::getValue) // tri sur le prix
+            Comparator.comparing(Map.Entry<String, Double>::getValue) // tri sur le prix, Création du Comparator → types parfois nécessaires
                 .reversed()                                     // prix décroissant
                 .thenComparing(Map.Entry::getKey)               // puis symbole croissant
         )
